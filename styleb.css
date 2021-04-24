@@ -1,7 +1,7 @@
-rating, .rating, .upt__info__ratings, good, bad {
+body.ratingsHidden rating, body.ratingsHidden .rating, body.ratingsHidden .upt__info__ratings, body.ratingsHidden good, body.ratingsHidden bad {
 	visibility: hidden;
 }
 
-.upt__info__ratings .span {
+body.ratingsHidden .upt__info__ratings .span {
 	height: 0px;
 }

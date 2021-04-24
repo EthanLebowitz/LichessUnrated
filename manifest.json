@@ -11,7 +11,7 @@
 		}
 	],
 	
-	"browser_action": {
+	"action": {
 		"default_popup": "popup.html"
 	}
 }
