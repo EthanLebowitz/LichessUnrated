@@ -1,0 +1,7 @@
+rating, .rating, .upt__info__ratings, good, bad {
+	visibility: hidden;
+}
+
+.upt__info__ratings .span {
+	height: 0px;
+}

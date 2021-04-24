@@ -1,0 +1,17 @@
+{
+	"manifest_version": 3,
+	"name": "Rating Free Lichess",
+	"version": "1.0",
+
+	"content_scripts": [
+		{
+			"matches": ["https://lichess.org/*"],
+			"js": ["content.js"],
+			"css": ["styleb.css"]
+		}
+	],
+	
+	"browser_action": {
+		"default_popup": "popup.html"
+	}
+}
