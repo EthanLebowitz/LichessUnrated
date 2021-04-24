@@ -63,7 +63,31 @@ function addUserLinkEventListeners(){
 	console.log(userLinks);
 }
 
+//https://www.rainbodesign.com/pub/css/css-javascript.html
+function removeStylesheet(theHref) {
+	var sheets = document.styleSheets;
+	for (i=0; i<sheets.length; i++) {
+		console.log(sheets[i].href);
+		if (sheets[i].href == theHref) {
+			sheets[i].disabled = true;
+		} // endif sheets[i].href
+	} // end for i
+} // end removeStylesheet()
+
+function addStylesheet(theHref) {
+	if(document.createStyleSheet) {
+		document.createStyleSheet(theHref);
+	} else {
+		var newSheet = document.createElement('link');
+		newSheet.setAttribute('rel','stylesheet');
+		newSheet.setAttribute('type','text/css');
+		newSheet.setAttribute('href', theHref);
+		document.getElementsByTagName('head')[0].appendChild(newSheet);
+	}
+} // end addStylesheet()
+
 window.onload = () => {
-	removeRatings();
+	//removeRatings();
+	removeStylesheet("styleb.css");
 	//addUserLinkEventListeners();
 }
