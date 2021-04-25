@@ -2,6 +2,10 @@
 	"manifest_version": 3,
 	"name": "Rating Free Lichess",
 	"version": "1.0",
+	
+	"permissions": [
+		"storage"
+	],
 
 	"content_scripts": [
 		{
