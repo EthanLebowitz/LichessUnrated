@@ -17,6 +17,7 @@ function removeRatingClassContent(){
 } */
 
 function removeRatingFromUserLink(){
+	console.log("remove user link ratings");
 	var elements = document.getElementsByClassName("user-link");
 	for(var elementIndex = 0; elementIndex < elements.length; elementIndex++){
 		var element = elements[elementIndex];
@@ -51,19 +52,39 @@ function removeRatings(){
 	//removeRatingFromUserMouseover();
 }
 
-/* function addUserLinkEventListeners(){
-	var userLinks = document.getElementsByClassName("text");
-	for(var linkIndex=0; linkIndex < userLinks.length; linkIndex++){
-		var element = userLinks[linkIndex];
-		if(element.id != "reconnecting"){
-			element.onmouseover = function(){
-				console.log(1);
-				removeRatingFromUserMouseover();
+function addUserLinkMutationObserver(){
+	
+	var elements = document.getElementsByClassName("game__meta__players");
+	if(elements.length == 0){return;}
+	var element = elements[0];
+	console.log(element);
+	//https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver
+	// Select the node that will be observed for mutations
+	const targetNode = element;
+
+	// Options for the observer (which mutations to observe)
+	const config = { attributes: true, childList: true, subtree: true };
+
+	// Callback function to execute when mutations are observed
+	const callback = function(mutationsList, observer) {
+		// Use traditional 'for loops' for IE 11
+		for(const mutation of mutationsList) {
+			removeRatingFromUserLink();
+			if (mutation.type === 'childList') {
+				console.log('A child node has been added or removed.');
+			}
+			else if (mutation.type === 'attributes') {
+				console.log('The ' + mutation.attributeName + ' attribute was modified.');
 			}
 		}
-	}
-	console.log(userLinks);
-} */
+	};
+
+	// Create an observer instance linked to the callback function
+	const observer = new MutationObserver(callback);
+
+	// Start observing the target node for configured mutations
+	observer.observe(targetNode, config);
+}
 
 function storeSetting(hideRatings){
 	chrome.storage.local.set({"hideRatings": hideRatings}, function() {
@@ -109,7 +130,10 @@ document.body.classList.toggle('userLinksHidden');
 
 window.onload = () => {
 	getHidingRatings().then(value => {
-		if(value){removeRatings(value);}
+		if(value){
+			removeRatings(value);
+			addUserLinkMutationObserver();
+		}
 		else{
 			document.body.classList.toggle('ratingsHidden');
 			document.body.classList.toggle('userLinksHidden');
