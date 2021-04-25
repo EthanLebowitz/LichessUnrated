@@ -24,6 +24,7 @@ function removeRatingFromUserLink(){
 		var newText = elementText.split(" (")[0];
 		element.innerHTML = newText;
 	}
+	document.body.classList.toggle('userLinksHidden');
 }
 
 /* function removeRatingFromUserMouseover(){
@@ -104,11 +105,15 @@ function getHidingRatings(){
 
 //https://stackoverflow.com/questions/38003840/how-to-toggle-css-style-in-google-chrome-extensionmanifest
 document.body.classList.toggle('ratingsHidden');
+document.body.classList.toggle('userLinksHidden');
 
 window.onload = () => {
 	getHidingRatings().then(value => {
 		if(value){removeRatings(value);}
-		else{document.body.classList.toggle('ratingsHidden');}
+		else{
+			document.body.classList.toggle('ratingsHidden');
+			document.body.classList.toggle('userLinksHidden');
+		}
 		hidingRatings = value;
 	});
 }

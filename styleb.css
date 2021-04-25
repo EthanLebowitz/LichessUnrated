@@ -5,3 +5,7 @@ body.ratingsHidden rating, body.ratingsHidden .rating, body.ratingsHidden .upt__
 body.ratingsHidden .upt__info__ratings .span {
 	height: 0px;
 }
+
+body.userLinksHidden .user-link {
+	visibility: hidden;
+}
