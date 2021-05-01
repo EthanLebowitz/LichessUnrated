@@ -22,10 +22,12 @@ function removeRatingFromUserLink(){
 	for(var elementIndex = 0; elementIndex < elements.length; elementIndex++){
 		var element = elements[elementIndex];
 		var elementText = element.innerHTML;
-		var newText = elementText.split(" (")[0];
-		element.innerHTML = newText;
+		if(elementText.includes(" (")){
+			var newText = elementText.split(" (")[0];
+			element.innerHTML = newText;
+		}
 	}
-	document.body.classList.toggle('userLinksHidden');
+	//document.body.classList.toggle('userLinksHidden');
 }
 
 /* function removeRatingFromUserMouseover(){
@@ -49,6 +51,7 @@ function removeRatings(){
 	//removeRatingTagContent();
 	//removeRatingClassContent();
 	removeRatingFromUserLink();
+	removeRatingsFromPastGames();
 	//removeRatingFromUserMouseover();
 }
 
@@ -67,11 +70,8 @@ function addUserLinkMutationObserver(){
 
 	// Callback function to execute when mutations are observed
 	const callback = function(mutationsList, observer) {
-		// Use traditional 'for loops' for IE 11
-		for(const mutation of mutationsList) {
-			removeRatingFromUserLink();
-			observer.disconnect();
-		}
+		removeRatingFromUserLink();
+		observer.disconnect();
 	};
 
 	// Create an observer instance linked to the callback function
@@ -136,20 +136,47 @@ function shrinkRatingHistoryContainer(){ //not working
 	}
 }
 
+function removeRatingsFromPastGames() {
+	var players = document.getElementsByClassName("player");
+	
+	for(var i=0; i<players.length; i++){
+		var element = players[i];
+		element.innerHTML = element.innerHTML.split("<br>")[0];
+	}
+	//document.body.classList.toggle('playerElementsHidden');
+}
+
+function addAngleContentMutationObserver(){
+	var elements = document.getElementsByClassName("angle-content");
+	if(elements.length > 0){
+		element = elements[0];
+		const targetNode = element;
+		const config = { childList: true };
+		
+		const callback = function(mutationsList, observer) {
+			removeRatingsFromPastGames();
+		};
+		
+		const observer = new MutationObserver(callback);
+		observer.observe(targetNode, config);
+	}
+}
+
 //https://stackoverflow.com/questions/38003840/how-to-toggle-css-style-in-google-chrome-extensionmanifest
 document.body.classList.toggle('ratingsHidden');
-document.body.classList.toggle('userLinksHidden');
+//document.body.classList.toggle('userLinksHidden');
+//document.body.classList.toggle('playerElementsHidden');
 
 window.onload = () => {
 	getHidingRatings().then(value => {
 		if(value){
 			removeRatings(value);
 			addUserLinkMutationObserver();
-			//shrinkRatingHistoryContainer();
+			addAngleContentMutationObserver(); //for removing ratings from past games in user profile
 		}
 		else{
 			document.body.classList.toggle('ratingsHidden');
-			document.body.classList.toggle('userLinksHidden');
+			//document.body.classList.toggle('userLinksHidden');
 		}
 		hidingRatings = value;
 	});

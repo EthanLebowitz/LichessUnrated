@@ -1,4 +1,4 @@
-body.ratingsHidden rating, body.ratingsHidden .rating, body.ratingsHidden .upt__info__ratings, body.ratingsHidden good, body.ratingsHidden bad, body.ratingsHidden .rating-history {
+body.ratingsHidden rating, body.ratingsHidden .rating, body.ratingsHidden .upt__info__ratings, body.ratingsHidden good, body.ratingsHidden bad, body.ratingsHidden .rating-history, body.ratingsHidden .rank {
 	visibility: hidden;
 }
 
@@ -9,3 +9,9 @@ body.ratingsHidden .upt__info__ratings .span {
 body.userLinksHidden .user-link {
 	visibility: hidden;
 }
+
+/*
+body.playerElementsHidden .player {
+	visibility: hidden;
+}
+*/
