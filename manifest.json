@@ -1,5 +1,5 @@
 {
-	"manifest_version": 3,
+	"manifest_version": 2,
 	"name": "Rating Free Lichess",
 	"version": "1.0",
 	
@@ -14,8 +14,9 @@
 			"css": ["styleb.css"]
 		}
 	],
-	
-	"action": {
-		"default_popup": "popup.html"
+	"browser_action": {},
+	"background": {
+		"scripts": ["background.js"],
+		"persistent": false
 	}
 }
