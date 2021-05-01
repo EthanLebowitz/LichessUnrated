@@ -54,7 +54,7 @@ function removeRatings(){
 
 function addUserLinkMutationObserver(){
 	
-	var elements = document.getElementsByClassName("game__meta__players");
+	var elements = document.getElementsByClassName("round__side");
 	if(elements.length == 0){return;}
 	var element = elements[0];
 	console.log(element);
@@ -63,19 +63,14 @@ function addUserLinkMutationObserver(){
 	const targetNode = element;
 
 	// Options for the observer (which mutations to observe)
-	const config = { attributes: true, childList: true, subtree: true };
+	const config = { childList: true };
 
 	// Callback function to execute when mutations are observed
 	const callback = function(mutationsList, observer) {
 		// Use traditional 'for loops' for IE 11
 		for(const mutation of mutationsList) {
 			removeRatingFromUserLink();
-			if (mutation.type === 'childList') {
-				console.log('A child node has been added or removed.');
-			}
-			else if (mutation.type === 'attributes') {
-				console.log('The ' + mutation.attributeName + ' attribute was modified.');
-			}
+			observer.disconnect();
 		}
 	};
 
@@ -124,6 +119,23 @@ function getHidingRatings(){
 	});
 }
 
+function shrinkRatingHistoryContainer(){ //not working
+	var elements = document.getElementsByClassName("highcharts-container");
+	console.log(elements);
+	if(elements.length > 0){
+		var container = elements[0];
+		container.style.width = "0px"
+		console.log(container.style.width);
+	}
+	var elements = document.getElementsByClassName("rating-history");
+	console.log(elements);
+	if(elements.length > 0){
+		var container = elements[0];
+		container.style.width = "0px"
+		console.log(container.style.width);
+	}
+}
+
 //https://stackoverflow.com/questions/38003840/how-to-toggle-css-style-in-google-chrome-extensionmanifest
 document.body.classList.toggle('ratingsHidden');
 document.body.classList.toggle('userLinksHidden');
@@ -133,6 +145,7 @@ window.onload = () => {
 		if(value){
 			removeRatings(value);
 			addUserLinkMutationObserver();
+			//shrinkRatingHistoryContainer();
 		}
 		else{
 			document.body.classList.toggle('ratingsHidden');
