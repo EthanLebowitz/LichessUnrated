@@ -35,6 +35,19 @@ function removePuzzleSessionRatingChanges(){
 }
 
 /*
+ * Removes ratings from the leaderboards.
+ */
+function removeLeaderboardRatings(){
+	var textElements = document.getElementsByClassName("text");
+	for(var i=0; i<textElements.length; i++){
+		var element = textElements[i];
+		if(element.title.includes("rating over")){
+			element.innerHTML = "";
+		}
+	}
+}
+
+/*
  * Calls functions to initially remove ratings when the page is loaded
  */
 function removeRatings(){
