@@ -1,5 +1,11 @@
-
+/*
+ * author: Ethan Lebowitz
+ */
+ 
 var hidingRatings;
+/*
+ * Gets the "hideRatings" setting from storage or initializes it if it doesn't exist.
+ */
 function getHidingRatings(){
 	return new Promise(function(resolve, reject) {
 		chrome.storage.local.get(['hideRatings'], function(result) {
@@ -24,6 +30,9 @@ function storeSetting(hideRatings){
 	});
 }
 
+/*
+ * Changes the extension icon based on the "hideRatings" setting
+ */
 function toggleIcon(value){
 	console.log(value);
 	if(!value){
@@ -33,13 +42,17 @@ function toggleIcon(value){
 	}
 }
 
+/*
+ * Toggles on/off "hideRatings" setting. Toggles icon. Stores setting.
+ * Sends message to all the tabs so they will reload. 
+ */
 function toggleRatings(){
 	chrome.tabs.query({}, function(tabs) {
 		for (var i=0; i<tabs.length; ++i) {
-			chrome.tabs.sendMessage(tabs[i].id, {command: "toggleRatings"});
 			hidingRatings = !hidingRatings;
 			toggleIcon(hidingRatings);
 			storeSetting(hidingRatings);
+			chrome.tabs.sendMessage(tabs[i].id, {command: "toggleRatings"});
 		}
 	});
 }

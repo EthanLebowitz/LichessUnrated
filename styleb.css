@@ -1,3 +1,7 @@
+/*
+ * author: Ethan Lebowitz
+ */
+ 
 rating, .rating, .upt__info__ratings, body good, bad, .rating-history, .rank, .puzzle__side__user__rating {
 	visibility: hidden;
 }
@@ -18,8 +22,4 @@ body.userLinksShown .user-link {
 }
 body.playerShown .player {
 	visibility: visible;
-}
-
-body.ratingsShown .upt__info__ratings .span {
-	height: 0px;
 }
