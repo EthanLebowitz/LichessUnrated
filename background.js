@@ -36,9 +36,9 @@ function storeSetting(hideRatings){
 function toggleIcon(value){
 	console.log(value);
 	if(!value){
-		chrome.browserAction.setIcon({path: 'icons/icon16inactive.png'});
+		chrome.browserAction.setIcon({path: 'icons/icon128inactive.png'});
 	} else {
-		chrome.browserAction.setIcon({path: 'icons/icon16active.png'});
+		chrome.browserAction.setIcon({path: 'icons/icon128active.png'});
 	}
 }
 

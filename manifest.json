@@ -7,9 +7,10 @@
 		"storage"
 	],
 	
-	"icons": { "16": "icons/icon16active.png",
-           "48": "icons/icon48active.png",
-          "128": "icons/icon128active.png" },
+	"icons": {
+		"48": "icons/icon48active.png",
+		"128": "icons/icon128active.png" 
+	},
 
 	"content_scripts": [
 		{
