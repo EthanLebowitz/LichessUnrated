@@ -213,13 +213,15 @@ function addAngleContentMutationObserver(){
  * can hide the ratings.
  */
 function addGamesMutationObserver(){
-	const config = { childList: true };
+	const config = { childList: true, subtree: true };
 	
 	const callback = function(mutationsList, observer) {
+		observer.disconnect();
 		removeRatingsFromPastGames();
+		addGamesMutationObserver();
 	};
 	
-	addMutationObserver("games", callback, config);
+	addMutationObserver("search__result", callback, config);
 }
 
 /*
