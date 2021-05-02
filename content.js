@@ -48,7 +48,7 @@ function removeChampionRatings(){
 /*
  * Removes ratings from the leaderboards.
  */
-function removeLeaderboardRatings(){
+function removeCommunityLeaderboardRatings(){
 	//remove ratings from online players sidebar on leaderboard page
 	var textElements = document.getElementsByClassName("text");
 	for(var i=0; i<textElements.length; i++){
@@ -71,6 +71,20 @@ function removeLeaderboardRatings(){
 }
 
 /*
+ * Removes ratings from the leaderboard on the front page of lichess.
+ */
+function removeFrontPageLeaderboardRatings(){
+	var leaderboards = document.getElementsByClassName("lobby__leaderboard lobby__box");
+	if(leaderboards.length == 0){return;}
+	var leaderboard = leaderboards[0];
+	var ratings = leaderboard.querySelectorAll("td.text");
+	for(var i=0; i<ratings.length; i++){
+		var ratingElement = ratings[i];
+		ratingElement.innerHTML = "";
+	}
+}
+
+/*
  * Calls functions to initially remove ratings when the page is loaded
  */
 function removeRatings(){
@@ -79,7 +93,8 @@ function removeRatings(){
 	removeRatingsFromPastGames();
 	removePuzzleRatings();
 	removePuzzleSessionRatingChanges();
-	removeLeaderboardRatings();
+	removeCommunityLeaderboardRatings();
+	removeFrontPageLeaderboardRatings();
 	removeChampionRatings();
 }
 
@@ -234,6 +249,7 @@ window.onload = () => {
 		}
 		else{
 			document.body.classList.toggle('dynamicContentShown');
+			document.body.classList.toggle('ratingsShown');
 		}
 		console.log(value);
 		hidingRatings = value;
