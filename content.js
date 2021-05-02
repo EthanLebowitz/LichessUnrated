@@ -133,6 +133,7 @@ class PuzzleRatingsRemover {
 		var remover = new PuzzleRatingsRemover();
 		remover.removePuzzleSessionRatingChanges();
 		remover.removePuzzleRatings();
+		remover.addPuzzleSessionMutationObserver();
 	}
 	
 	/*
@@ -161,6 +162,21 @@ class PuzzleRatingsRemover {
 		
 		var splitInnerHTML = element.innerHTML.split("<p>Rating");
 		element.innerHTML = splitInnerHTML[0] + splitInnerHTML[1].substring(splitInnerHTML[1].indexOf("</p>")+4);
+	}
+
+	/*
+	 * Add mutation listener to watch puzzle session boxes
+	 */
+	addPuzzleSessionMutationObserver(){
+		const config = { childList: true };
+		
+		var self = this;
+		const callback = function(mutationsList, observer) {
+			console.log("puzzle update");
+			self.removePuzzleSessionRatingChanges();
+		};
+		
+		addMutationObserver("puzzle__session", callback, config); //this catches many more mutations than we need
 	}
 	
 }
