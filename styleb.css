@@ -10,10 +10,11 @@ body.ratingsShown rating, body.ratingsShown .rating, body.ratingsShown .upt__inf
 	visibility: visible;
 }
 
-.user-link, .player, .infos.puzzle, .puzzle__session, .community__online, .leaderboards {
+.user-link, .player, .infos.puzzle, .puzzle__session, .community__online, .leaderboards, .champion {
 	visibility: hidden;
 }
-body.dynamicContentShown .user-link, body.dynamicContentShown .player, body.dynamicContentShown .infos.puzzle, body.dynamicContentShown .puzzle__session, body.dynamicContentShown .community__online, body.dynamicContentShown .leaderboards {
+
+body.dynamicContentShown .user-link, body.dynamicContentShown .player, body.dynamicContentShown .infos.puzzle, body.dynamicContentShown .puzzle__session, body.dynamicContentShown .community__online, body.dynamicContentShown .leaderboards, body.dynamicContentShown .champion {
 	visibility: visible;
 }
 

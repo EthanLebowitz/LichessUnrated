@@ -35,6 +35,17 @@ function removePuzzleSessionRatingChanges(){
 }
 
 /*
+ * Removes ratings from the champions list on the left of lichess tv.
+ */
+function removeChampionRatings(){
+	var championElements = document.getElementsByClassName("champion");
+	for(var i=0; i<championElements.length; i++){
+		var champion = championElements[i];
+		champion.innerHTML = champion.innerHTML.split(" ")[0];
+	}
+}
+
+/*
  * Removes ratings from the leaderboards.
  */
 function removeLeaderboardRatings(){
@@ -69,6 +80,7 @@ function removeRatings(){
 	removePuzzleRatings();
 	removePuzzleSessionRatingChanges();
 	removeLeaderboardRatings();
+	removeChampionRatings();
 }
 
 /*
