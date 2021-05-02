@@ -109,8 +109,7 @@ function addAngleContentMutationObserver(){
 	}
 }
 
-//https://stackoverflow.com/questions/38003840/how-to-toggle-css-style-in-google-chrome-extensionmanifest
-document.body.classList.toggle('ratingsHidden');
+
 
 window.onload = () => {
 	getHidingRatings().then(value => {
@@ -121,9 +120,17 @@ window.onload = () => {
 			//for removing ratings from past games in user profile
 			addAngleContentMutationObserver(); 
 			addGamesMutationObserver();
+			
+			//add these to prevent a flicker of the ratings from getting through before they can
+			//be removed by javascript.
+			document.body.classList.toggle('userLinksShown');
+			document.body.classList.toggle('playerShown');
 		}
 		else{
-			document.body.classList.toggle('ratingsHidden');
+			//https://stackoverflow.com/questions/38003840/how-to-toggle-css-style-in-google-chrome-extensionmanifest
+			document.body.classList.toggle('ratingsShown');
+			document.body.classList.toggle('userLinksShown');
+			document.body.classList.toggle('playerShown');
 		}
 		hidingRatings = value;
 	});

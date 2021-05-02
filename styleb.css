@@ -1,7 +1,25 @@
-body.ratingsHidden rating, body.ratingsHidden .rating, body.ratingsHidden .upt__info__ratings, body.ratingsHidden good, body.ratingsHidden bad, body.ratingsHidden .rating-history, body.ratingsHidden .rank, body.ratingsHidden .puzzle__side__user__rating {
+rating, .rating, .upt__info__ratings, body good, bad, .rating-history, .rank, .puzzle__side__user__rating {
 	visibility: hidden;
 }
 
-body.ratingsHidden .upt__info__ratings .span {
+body.ratingsShown rating, body.ratingsShown .rating, body.ratingsShown .upt__info__ratings, body.ratingsShown good, body.ratingsShown bad, body.ratingsShown .rating-history, body.ratingsShown .rank, body.ratingsShown .puzzle__side__user__rating {
+	visibility: visible;
+}
+
+.user-link {
+	visibility: hidden;
+}
+body.userLinksShown .user-link {
+	visibility: visible;
+}
+
+.player {
+	visibility: hidden;
+}
+body.playerShown .player {
+	visibility: visible;
+}
+
+body.ratingsShown .upt__info__ratings .span {
 	height: 0px;
 }
