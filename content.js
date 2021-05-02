@@ -17,6 +17,54 @@ function removeRatingFromUserLink(){
 		}
 	}
 }
+ 
+/*
+ * Removes the ratings from the lobby
+ */
+function removeRatingsFromLobby(){
+	var lobby = document.getElementsByClassName("hooks__list");
+	if(lobby.length == 0){return;}
+	lobby = lobby[0];
+	var tableRows = lobby.querySelectorAll("tr.join");
+	console.log(tableRows);
+	for(var rowIndex = 0; rowIndex < tableRows.length; rowIndex++){
+		var row = tableRows[rowIndex];
+		var cells = row.querySelectorAll("td");
+		cells[2].innerHTML = ""; //ratings are held in td index 2
+	}
+}
+
+/*
+ * Add mutation observer to watch the lobby app and continue removing ratings as it updates.
+ */
+function addLobbyGamesMutationObserver(){
+	const config = { childList: true, subtree: true };
+	
+	const callback = function(mutationsList, observer) {
+		console.log("mutated");
+		observer.disconnect();
+		removeRatingsFromLobby();
+		addLobbyGamesMutationObserver();
+	};
+	
+	addMutationObserver("lobby__app", callback, config); //this catches many more mutations than we need
+}
+
+/*
+ * Add mutation observer to watch the lobby so we can add mutation observer when lobby or
+ * correspondence tab clicked.
+ */
+function addLobbyMutationObserver(){
+	const config = { childList: true };
+	
+	const callback = function(mutationsList, observer) {
+		console.log("mutated tabs?");
+		removeRatingsFromLobby();
+		addLobbyGamesMutationObserver();
+	};
+	
+	addMutationObserver("lobby", callback, config); //this catches many more mutations than we need
+}
 
 /*
  * Removes rating changes from the puzzle session boxes under the board while playing puzzles.
@@ -96,6 +144,7 @@ function removeRatings(){
 	removeCommunityLeaderboardRatings();
 	removeFrontPageLeaderboardRatings();
 	removeChampionRatings();
+	removeRatingsFromLobby();
 }
 
 /*
@@ -229,7 +278,7 @@ function addGamesMutationObserver(){
  * or not based on the setting. 
  * 
  * Elements that include ratings that must be dynamically removed
- * are hidden by default in our extension stylesheet. We then toggle the "<element>Shown" class
+ * are hidden by default in our extension stylesheet. We then toggle the "dynamicContentShown" class
  * on the body to reveal them once the ratings have been removed (or if we don't have to remove
  * the ratings). This prevents the ratings from flashing before javascript can remove them.
  * This solution came from:
@@ -240,6 +289,8 @@ window.onload = () => {
 		if(value){
 			removeRatings(value);
 			addUserLinkMutationObserver();
+			addLobbyGamesMutationObserver();
+			addLobbyMutationObserver();
 			
 			//for removing ratings from past games in user profile
 			addAngleContentMutationObserver(); 

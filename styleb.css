@@ -2,7 +2,7 @@
  * author: Ethan Lebowitz
  */
  
-rating, .rating, .upt__info__ratings, body good, bad, .rating-history, .rank, .puzzle__side__user__rating {
+rating, .rating, .upt__info__ratings, good, bad, .rating-history, .rank, .puzzle__side__user__rating {
 	visibility: hidden;
 }
 
