@@ -19,12 +19,31 @@ function removeRatingFromUserLink(){
 }
 
 /*
+ * Removes rating changes from the puzzle session boxes under the board while playing puzzles.
+ */
+function removePuzzleSessionRatingChanges(){
+	var puzzlesSucceeded = document.getElementsByClassName("result-true");
+	var puzzlesFailed = document.getElementsByClassName("result-false");
+	for(var i=0; i<puzzlesSucceeded.length; i++){
+		var box = puzzlesSucceeded[i];
+		box.innerHTML = "";
+	}
+	for(var i=0; i<puzzlesFailed.length; i++){
+		var box = puzzlesFailed[i];
+		box.innerHTML = "";
+	}
+}
+
+/*
  * Calls functions to initially remove ratings when the page is loaded
  */
 function removeRatings(){
 	console.log("removing ratings");
 	removeRatingFromUserLink();
 	removeRatingsFromPastGames();
+	removePuzzleRatings();
+	removePuzzleSessionRatingChanges();
+	removeLeaderboardRatings();
 }
 
 /*
@@ -90,6 +109,19 @@ function removeRatingsFromPastGames() {
 		var element = players[i];
 		element.innerHTML = element.innerHTML.split("<br>")[0];
 	}
+}
+
+/*
+ * Removes ratings from puzzles.
+ */
+function removePuzzleRatings() {
+	var infos = document.getElementsByClassName("puzzle infos");
+	if (infos.length == 0){return;}
+	var element = infos[0];
+	
+	var splitInnerHTML = element.innerHTML.split("<p>Rating");
+	console.log(splitInnerHTML);
+	element.innerHTML = splitInnerHTML[0] + splitInnerHTML[1].substring(splitInnerHTML[1].indexOf("</p>")+4);
 }
 
 /*
@@ -163,11 +195,15 @@ window.onload = () => {
 			//be removed by javascript.
 			document.body.classList.toggle('userLinksShown');
 			document.body.classList.toggle('playerShown');
+			document.body.classList.toggle('puzzleInfoShown');
+			document.body.classList.toggle('puzzleSessionShown');
 		}
 		else{
 			document.body.classList.toggle('ratingsShown');
 			document.body.classList.toggle('userLinksShown');
 			document.body.classList.toggle('playerShown');
+			document.body.classList.toggle('puzzleInfoShown');
+			document.body.classList.toggle('puzzleSessionShown');
 		}
 		hidingRatings = value;
 	});

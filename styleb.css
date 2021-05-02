@@ -23,3 +23,18 @@ body.userLinksShown .user-link {
 body.playerShown .player {
 	visibility: visible;
 }
+
+.infos.puzzle {
+	visibility: hidden;
+}
+body.puzzleInfoShown .infos.puzzle {
+	visibility: visible;
+}
+
+.puzzle__session {
+	visibility: hidden;
+}
+body.puzzleSessionShown .puzzle__session {
+	visibility: visible;
+}
+
