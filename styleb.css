@@ -2,6 +2,17 @@
  * author: Ethan Lebowitz
  */
  
+/*
+ * LEGEND
+ * rating - tag used to indicate rating sometimes
+ * .rating - class used to indicate rating. Next to names above and below top game thumbnail on front page
+ * .upt__info__ratings - class that holds the ratings section of user mousover info
+ * good - positive rating changes in user profile and in game meta
+ * bad - negative rating changes in user profile and in game meta
+ * .rating-history - user profile rating history chart
+ * .rank - user profile rank information
+ * .puzzle__side__user__rating - users puzzle rating when on puzzle pages
+ */
 rating, .rating, .upt__info__ratings, good, bad, .rating-history, .rank, .puzzle__side__user__rating {
 	visibility: hidden;
 }
@@ -10,6 +21,17 @@ body.ratingsShown rating, body.ratingsShown .rating, body.ratingsShown .upt__inf
 	visibility: visible;
 }
 
+/*
+ * LEGEND
+ * .user-link - user link in game meta
+ * .player - containing class of user-link in game meta
+ * .infos.puzzle - contains puzzle info in puzzle meta, including the puzzle rating
+ * .puzzle__session - row of success/fail boxes at bottom of puzzle page
+ * .community__online - list of online players on lichess.org/player
+ * .leaderboards - leaderboards on lichess.org/player
+ * .champion - contains username (and rating) of current top rated player in a given category on the left of lichess.org/tv
+ * .lobby__leaderboard - leaderboard on the lichess front page
+ */
 .user-link, .player, .infos.puzzle, .puzzle__session, .community__online, .leaderboards, .champion, .lobby__leaderboard {
 	visibility: hidden;
 }
