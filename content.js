@@ -38,12 +38,24 @@ function removePuzzleSessionRatingChanges(){
  * Removes ratings from the leaderboards.
  */
 function removeLeaderboardRatings(){
+	//remove ratings from online players sidebar on leaderboard page
 	var textElements = document.getElementsByClassName("text");
 	for(var i=0; i<textElements.length; i++){
 		var element = textElements[i];
 		if(element.title.includes("rating over")){
 			element.innerHTML = "";
 		}
+	}
+	
+	//remove ratings from leaderboards
+	var leaderboards = document.getElementsByClassName("leaderboards");
+	if(leaderboards.length == 0){return;}
+	var leaderboardElement = leaderboards[0];
+	//get all list items that are under the leaderboards div
+	var listElements = leaderboardElement.querySelectorAll("li");
+	for(var i=0; i<listElements.length; i++){
+		var listElement = listElements[i];
+		listElement.innerHTML = listElement.innerHTML.substring(0,listElement.innerHTML.indexOf("</a>")+4);
 	}
 }
 
@@ -204,20 +216,14 @@ window.onload = () => {
 			addAngleContentMutationObserver(); 
 			addGamesMutationObserver();
 			
-			//add these to prevent a flicker of the ratings from getting through before they can
+			//add this to prevent a flicker of the ratings from getting through before they can
 			//be removed by javascript.
-			document.body.classList.toggle('userLinksShown');
-			document.body.classList.toggle('playerShown');
-			document.body.classList.toggle('puzzleInfoShown');
-			document.body.classList.toggle('puzzleSessionShown');
+			document.body.classList.toggle('dynamicContentShown');
 		}
 		else{
-			document.body.classList.toggle('ratingsShown');
-			document.body.classList.toggle('userLinksShown');
-			document.body.classList.toggle('playerShown');
-			document.body.classList.toggle('puzzleInfoShown');
-			document.body.classList.toggle('puzzleSessionShown');
+			document.body.classList.toggle('dynamicContentShown');
 		}
+		console.log(value);
 		hidingRatings = value;
 	});
 }

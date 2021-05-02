@@ -47,11 +47,11 @@ function toggleIcon(value){
  * Sends message to all the tabs so they will reload. 
  */
 function toggleRatings(){
+	hidingRatings = !hidingRatings;
+	toggleIcon(hidingRatings);
+	storeSetting(hidingRatings);
 	chrome.tabs.query({}, function(tabs) {
 		for (var i=0; i<tabs.length; ++i) {
-			hidingRatings = !hidingRatings;
-			toggleIcon(hidingRatings);
-			storeSetting(hidingRatings);
 			chrome.tabs.sendMessage(tabs[i].id, {command: "toggleRatings"});
 		}
 	});
