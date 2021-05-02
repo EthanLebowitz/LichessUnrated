@@ -1,6 +1,6 @@
 {
 	"manifest_version": 2,
-	"name": "Rating Free Lichess",
+	"name": "Lichess Unrated",
 	"version": "1.0",
 	
 	"permissions": [
